@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Email Signature in Salesforce</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&amp;family=Lexend:wght@400;500;600;700&amp;family=Lato:wght@400;700;900&amp;display=swap">
+<style>
+body{margin:0;font-family:'Lato',system-ui,sans-serif;background:#0E1B2E;color:#0B2545}
+a{color:#1466F0}a:hover{color:#0B4FC0}
+.stage *{box-sizing:border-box}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+.disp{font-family:'Lexend','Lato',sans-serif}
+.paused,.paused *{animation-play-state:paused !important}
+.sh{position:absolute;left:40px;top:-4px}
+.h2{font-family:'Lexend','Lato',sans-serif;font-size:30px;font-weight:700;color:#0B2545}
+.h2s{font-size:18px;color:#3B4F6B}
+.sc{position:absolute;top:66px;height:86px;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.sr{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.sn{font-family:'Lexend','Lato',sans-serif;width:30px;height:30px;border-radius:15px;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0}
+.st{font-size:16px;font-weight:900;color:#0B2545;line-height:1.2}
+.tg{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:11px;color:#FFFFFF;font-size:11px;font-weight:900;letter-spacing:.03em;white-space:nowrap}
+.mk{position:absolute;right:-9px;bottom:-11px}
+.panel{position:absolute;left:40px;top:170px;width:1200px;height:460px;border-radius:22px;background:#FFFFFF;box-shadow:0 14px 36px rgba(11,37,69,.10);overflow:hidden}
+.win{position:absolute;left:0;top:0;width:1200px;height:460px;background:#FFFFFF}
+.ill{position:absolute;left:26px;top:26px;width:470px;height:408px;border-radius:18px;overflow:hidden}
+.tc{position:absolute;left:530px;top:30px;width:640px;display:flex;flex-direction:column;gap:12px}
+.eb{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.tt{font-family:'Lexend','Lato',sans-serif;font-size:28px;font-weight:700;color:#0B2545;line-height:1.2;margin-bottom:2px}
+.bl{display:flex;gap:12px;align-items:flex-start}
+.bn{width:26px;height:26px;border-radius:13px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.bt{font-size:19px;line-height:1.4;color:#0B2545;font-weight:700}
+.lp{align-self:flex-start;margin-top:10px;height:46px;padding:0 20px 0 10px;border-radius:23px;display:inline-flex;align-items:center;gap:10px;font-size:17px;font-weight:900}
+.ex{margin-top:6px;border-radius:14px;background:#FFF7F0;border:2px dashed #C2410C;padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.exh{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#9A3412}
+.ext{font-size:17px;line-height:1.45;font-weight:700;color:#0B2545}
+.wc{position:absolute;background:#FFFFFF;border-radius:14px;box-shadow:0 10px 24px rgba(11,37,69,.14);overflow:hidden}
+.bar{height:30px;background:#E9EEF5;display:flex;align-items:center;gap:5px;padding:0 10px}
+.dot{width:8px;height:8px;border-radius:4px}
+.url{margin-left:6px;flex-grow:1;height:18px;border-radius:9px;background:#FFFFFF;font-size:11px;color:#3B4F6B;padding:0 8px;line-height:18px;white-space:nowrap;overflow:hidden}
+.ln{height:8px;border-radius:4px;background:#E3E9F2}
+.lab{font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#5A6B84}
+.fld{height:32px;border-radius:8px;border:2px solid #C9D3E1;display:flex;align-items:center;padding:0 10px;font-size:13px;color:#0B2545}
+.av{position:absolute}
+@keyframes panX{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(-1264px)}}
+.shot{position:absolute;left:26px;top:26px;width:700px;height:408px;border-radius:14px;background:#EEF2F8;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.tc2{position:absolute;left:752px;top:30px;width:424px;display:flex;flex-direction:column;gap:12px}
+.call{margin-top:6px;border-radius:14px;background:#1466F0;color:#FFFFFF;padding:14px 18px;display:flex;flex-direction:column;gap:4px}
+.rz{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:16px;background:#FFF7F0;border:2px solid #C2410C;color:#7C2D12;font-size:14px;font-weight:900;white-space:nowrap}
+.ch{height:40px;padding:0 16px;border-radius:20px;background:#FFFFFF;display:inline-flex;align-items:center;font-size:15px;font-weight:900}
+.row{height:44px;border-radius:12px;background:#FFFFFF;display:flex;align-items:center;gap:10px;padding:0 14px;font-size:16px;font-weight:700;color:#0B2545;box-shadow:0 4px 10px rgba(11,37,69,.06)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeOut{from{opacity:1}to{opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fromL{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@keyframes fromR{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes win{0%{opacity:0;transform:translateY(14px)}9%{opacity:1;transform:none}90%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-10px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(20,102,240,.45),0 18px 40px rgba(11,37,69,.14)}50%{box-shadow:0 0 0 16px rgba(20,102,240,0),0 18px 40px rgba(11,37,69,.14)}}
+@keyframes warnPulse{0%,100%{box-shadow:0 0 0 0 rgba(234,88,12,.55)}50%{box-shadow:0 0 0 12px rgba(234,88,12,0)}}
+@keyframes press{0%,100%{transform:scale(1)}50%{transform:scale(.94)}}
+@keyframes typeIn{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes stamp{0%{opacity:0;transform:scale(1.7) rotate(-7deg)}60%{opacity:1;transform:scale(.95) rotate(-7deg)}100%{opacity:1;transform:scale(1) rotate(-7deg)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes march{to{stroke-dashoffset:-72}}
+@keyframes arc{from{stroke-dashoffset:302}to{stroke-dashoffset:0}}
+@keyframes pass{from{transform:translateX(0)}to{transform:translateX(196px)}}
+@keyframes toL{from{opacity:1;transform:none}to{opacity:0;transform:translate(-320px,250px) scale(.35)}}
+@keyframes toR{from{opacity:1;transform:none}to{opacity:0;transform:translate(320px,250px) scale(.35)}}
+@keyframes hiO{0%{background:#FFFFFF}100%{background:#FFF1E6;box-shadow:0 0 0 3px #C2410C}}
+@keyframes toGrey{to{background:#94A3B8}}
+@keyframes litRing{0%{box-shadow:0 0 0 0 currentColor;transform:none}8%,92%{box-shadow:0 0 0 4px currentColor,0 16px 30px rgba(11,37,69,.18);transform:translateY(-6px)}100%{box-shadow:0 0 0 0 transparent;transform:none}}
+.ctl{height:44px;min-width:44px;padding:0 14px;border-radius:10px;border:1px solid #2A3E5C;background:#15263F;color:#E6EEF8;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap}
+.ctl:hover{background:#1D3354}
+.ctl.main{background:#1466F0;border-color:#1466F0;color:#fff}
+.ctl.main:hover{background:#0B55D0}
+.chip{height:32px;padding:0 7px;letter-spacing:-.01em;border-radius:16px;border:1px solid #2A3E5C;background:transparent;color:#A9B8CC;font-family:'Lato',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.chip:hover{color:#fff;border-color:#4A6488}
+.chip.done{color:#D5E0EE;border-color:#34507A;background:#16304F}
+.chip.on{color:#0B2545;background:#8FD16F;border-color:#8FD16F}
+</style>
+<style>
+html,body{height:100%}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden}
+#fit{width:1280px;height:870px;transform-origin:center center;flex-shrink:0}
+[hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div id="fit">
+<div style="width: 1280px; height: 870px; background: #0E1B2E; display: flex; flex-direction: column; overflow: hidden;">
+
+<!-- hidden symbol library -->
+<svg width="0" height="0" style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+<defs>
+<symbol id="dc-customer" viewBox="0 0 200 200">
+<path d="M58 88 C52 38 148 38 142 88 L146 124 C132 132 124 116 122 104 L78 104 C76 116 68 132 54 124 Z" fill="#3B2A26"></path>
+<path d="M40 200 C40 150 66 128 100 128 C134 128 160 150 160 200 Z" fill="#23A094"></path>
+<path d="M84 129 L100 152 L116 129 Z" fill="#E6F6F3"></path>
+<rect x="89" y="104" width="22" height="28" rx="8" fill="#E2A77F"></rect>
+<ellipse cx="100" cy="82" rx="32" ry="36" fill="#F1C39E"></ellipse>
+<path d="M66 76 C68 42 132 40 136 78 C118 64 94 60 70 80 Z" fill="#3B2A26"></path>
+<circle cx="88" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="112" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="79" cy="98" r="5.5" fill="#F29A86" opacity=".45"></circle>
+<circle cx="121" cy="98" r="5.5" fill="#F29A86" opacity=".45"></circle>
+<path d="M90 102 Q100 109 110 102" stroke="#A0523D" stroke-width="3" fill="none" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-agent" viewBox="0 0 200 200">
+<path d="M40 200 C40 150 66 128 100 128 C134 128 160 150 160 200 Z" fill="#1466F0"></path>
+<path d="M84 129 L100 150 L116 129 Z" fill="#FFFFFF"></path>
+<rect x="89" y="104" width="22" height="28" rx="8" fill="#B97A55"></rect>
+<ellipse cx="68" cy="88" rx="7" ry="10" fill="#C98B63"></ellipse>
+<ellipse cx="132" cy="88" rx="7" ry="10" fill="#C98B63"></ellipse>
+<ellipse cx="100" cy="82" rx="32" ry="36" fill="#D39A72"></ellipse>
+<path d="M67 80 C62 42 138 40 133 80 C126 60 80 58 67 80 Z" fill="#1F1A17"></path>
+<circle cx="88" cy="87" r="3.8" fill="#1F2937"></circle>
+<circle cx="112" cy="87" r="3.8" fill="#1F2937"></circle>
+<path d="M89 101 Q100 109 111 101" stroke="#7A3B2A" stroke-width="3" fill="none" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-server" viewBox="0 0 120 150">
+<rect x="10" y="6" width="100" height="40" rx="8" fill="#243B5E"></rect>
+<rect x="10" y="54" width="100" height="40" rx="8" fill="#2E4A73"></rect>
+<rect x="10" y="102" width="100" height="40" rx="8" fill="#243B5E"></rect>
+<circle cx="28" cy="26" r="5" fill="#8FD16F"></circle><circle cx="28" cy="74" r="5" fill="#8FD16F"></circle><circle cx="28" cy="122" r="5" fill="#8FD16F"></circle>
+<rect x="46" y="22" width="50" height="8" rx="4" fill="#5B7BA6"></rect><rect x="46" y="70" width="50" height="8" rx="4" fill="#5B7BA6"></rect><rect x="46" y="118" width="50" height="8" rx="4" fill="#5B7BA6"></rect>
+</symbol>
+<symbol id="dc-check" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="11" fill="#3E9B2F"></circle>
+<path d="M6.5 12.5 L10.3 16.2 L17.5 8.6" stroke="#FFFFFF" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-x" viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="11" fill="#C2410C"></circle>
+<path d="M8 8l8 8M16 8l-8 8" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-warn" viewBox="0 0 24 24">
+<path d="M12 3 L22 20.5 H2 Z" fill="#F2A93B" stroke="#8A5200" stroke-width="1.4" stroke-linejoin="round"></path>
+<path d="M12 9.5 V14.5" stroke="#5A3500" stroke-width="2.2" stroke-linecap="round"></path>
+<circle cx="12" cy="17.4" r="1.3" fill="#5A3500"></circle>
+</symbol>
+<symbol id="dc-ticket" viewBox="0 0 24 24">
+<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4z" fill="none" stroke="currentColor" stroke-width="1.8"></path>
+<path d="M9 5v14" stroke="currentColor" stroke-width="1.8" stroke-dasharray="2 2.4"></path>
+</symbol>
+<symbol id="dc-clock" viewBox="0 0 24 24">
+<circle cx="12" cy="13" r="8.5" fill="none" stroke="currentColor" stroke-width="1.9"></circle>
+<path d="M12 8.5V13l3 2M10 2.5h4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-phone" viewBox="0 0 24 24">
+<path d="M5 3.5h3.5l2 5-2.5 1.6a11 11 0 0 0 5.4 5.4l1.6-2.5 5 2v3.5a2 2 0 0 1-2 2A17 17 0 0 1 3 5.5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-cal" viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M16 3v4M8 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-mail" viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-lock" viewBox="0 0 24 24">
+<rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.9"></path>
+<circle cx="12" cy="15.6" r="1.6" fill="currentColor"></circle>
+</symbol>
+<symbol id="dc-doc" viewBox="0 0 40 48">
+<path d="M4 4h22l10 10v30H4z" fill="#FFFFFF" stroke="#6D4AE0" stroke-width="2.4" stroke-linejoin="round"></path>
+<path d="M26 4v10h10" fill="none" stroke="#6D4AE0" stroke-width="2.4" stroke-linejoin="round"></path>
+<path d="M11 24h18M11 31h18M11 38h12" stroke="#B9A8F2" stroke-width="3" stroke-linecap="round"></path>
+</symbol>
+<symbol id="dc-img" viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"></rect>
+<circle cx="9" cy="9.5" r="1.8" fill="currentColor"></circle>
+<path d="M3.5 17l5-5 4 4 3-3 5 5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+</symbol>
+<symbol id="dc-play" viewBox="0 0 24 24">
+<path d="M7 4.5v15l12-7.5z" fill="currentColor"></path>
+</symbol>
+<symbol id="dc-edit" viewBox="0 0 24 24">
+<path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"></path>
+<path d="M13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="1.9"></path>
+</symbol>
+</defs>
+</svg>
+
+<!-- ===================== STAGE ===================== -->
+<div id="stage" class="stage" style="position: relative; width: 1280px; height: 720px; overflow: hidden; background: #F3F6FB; flex-shrink: 0;">
+
+<div style="position: absolute; left: -160px; top: -200px; width: 560px; height: 560px; border-radius: 50%; background: #E6EEFA;"></div>
+<div style="position: absolute; right: -120px; bottom: -220px; width: 520px; height: 520px; border-radius: 50%; background: #EAF5E4;"></div>
+
+<div style="position: absolute; left: 28px; top: 14px; display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; color: #3B4F6B; letter-spacing: .02em;">
+<span id="steps" style="display: contents;"></span>
+<span class="disp" style="font-weight: 700; color: #0B2545; font-size: 16px;">MotionPoint Support</span>
+<span style="width: 4px; height: 4px; border-radius: 2px; background: #94A3B8;"></span>
+<span>New Agent Training &middot; Email Signature</span>
+</div>
+
+<!-- ============ SCENE 0 · INTRO ============ -->
+<template id="scene-0">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div style="position: absolute; left: 0; top: 40px; width: 1280px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;"><div style="font-size: 16px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #3E8A2A; animation: up .8s .4s both;">Customer Support &middot; New Agent Training</div><h1 class="disp" style="margin: 0; font-size: 58px; line-height: 1.05; font-weight: 700; color: #0B2545; animation: up .9s .9s both;">Your Email Signature in Salesforce</h1><p style="margin: 0; font-size: 23px; color: #3B4F6B; max-width: 1040px; animation: up .9s 1.6s both;">Set it once. Every email you send from a case signs itself.</p></div>
+<div style="position: absolute; left: 40px; top: 250px; width: 380px; height: 180px; border-radius: 16px; background: #DCE7F7; border: 3px solid #1466F0; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 5s both;"><span class="eb" style="color: #1466F0;">Where</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Your avatar &rsaquo; Settings &rsaquo; Email &rsaquo; My Email Settings.</span></div>
+<div style="position: absolute; left: 450px; top: 250px; width: 380px; height: 180px; border-radius: 16px; background: #FCE3CC; border: 3px solid #C2410C; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 9s both;"><span class="eb" style="color: #C2410C;">What</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Copy the team signature, and add your own full name.</span></div>
+<div style="position: absolute; left: 860px; top: 250px; width: 380px; height: 180px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 13s both;"><span class="eb" style="color: #2F7A22;">Check</span><span style="font-size: 17px; font-weight: 700; color: #0B2545; line-height: 1.4;">Compose an email on a case. Your signature is already there.</span></div>
+<div style="position: absolute; left: 160px; top: 466px; width: 960px; height: 100px; border-radius: 20px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 18px; padding: 0 30px; animation: up .7s 18s both;"><svg width="40" height="40" style="flex-shrink: 0; color: #FFD27A;"><use href="#dc-check"></use></svg><span style="font-size: 21px; font-weight: 900; line-height: 1.4;">About five minutes, one time. Use the Copy signature button at the top of this page.</span></div>
+</div>
+</template>
+
+<!-- ============ SCENE 1 · URGENT? ============ -->
+<template id="scene-1">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 1: Why a signature?</div><div class="h2s">Every email you send from a case carries it.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">Signed</span></div><div class="st">Every email</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">Composer</span></div><div class="st">Set it once</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">First, why bother?</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="padding: 14px 18px; display: flex; flex-direction: column; gap: 10px;"><div style="font-size: 12px; color: #3B4F6B;"><b>To:</b> customer@example.com &nbsp; <b>Subject:</b> Case 00123456: update</div><div style="font-family: Georgia, serif; font-size: 13px; color: #202124; line-height: 1.5;">Hi Jordan,<br>Thank you for your patience. The PE fixed the button, and it works now on the Spanish site.</div><div style="border-top: 1px dashed #DCE1E8; padding-top: 8px; animation: fadeIn .5s 7s both;"><div style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; line-height: 1.4; color: #202124;">&mdash;<br>Alex Rivera<br>Customer Support Specialist<br>MarketFully<br>Direct: 954-421-0890<br>www.marketfully.com<br>MarketFully LinkedIn<br>&nbsp;<br>MotionPoint | Key Content | Social Element<br>&nbsp;<br><span style="font-size: 10.0px; color: #3B4F6B;">This communication contains proprietary information and may be confidential. If you are not the intended recipient, the reading, copying, disclosure or other use of the contents of this e-mail is strictly prohibited and you are instructed to please delete this e-mail immediately.</span></div></div></div></div><div style="position: absolute; left: 470px; top: 120px; width: 150px; padding: 4px 10px; border-radius: 8px; background: #2F7A22; color: #FFFFFF; font-size: 12px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,.18); animation: pop .45s 8s both;">Your signature</div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Why it matters &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Every email, signed the same way</div>
+<div class="bl" style="animation: fromR .6s 8s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Who you are, and your team.</span></div>
+<div class="bl" style="animation: fromR .6s 10s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">2</span><span class="bt" style="font-size: 18px;">How to reach us.</span></div>
+<div class="bl" style="animation: fromR .6s 12s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">The confidentiality note.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #F3F6FB; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 320px; height: 220px; border-radius: 16px; background: #DCE7F7; border: 3px solid #1466F0; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 27s both; justify-content: flex-start;"><b style="font-size: 16px; color: #0B2545;">Salesforce Email Composer</b><span style="font-size: 14px; color: #0B2545; line-height: 1.45;">Send emails without leaving Salesforce. They&rsquo;re logged on the case, for everyone to see.</span></div><div style="position: absolute; left: 360px; top: 14px; width: 320px; height: 220px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; gap: 6px; animation: pop .55s 30s both; justify-content: flex-start;"><b style="font-size: 16px; color: #0B2545;">Signature added for you</b><span style="font-size: 14px; color: #0B2545; line-height: 1.45;">Saved once in your settings, it shows at the bottom of every new email you compose.</span></div><div style="position: absolute; left: 20px; top: 254px; width: 660px; height: 124px; border-radius: 20px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 18px; padding: 0 30px; animation: up .7s 34s both;"><span style="font-size: 16px; font-weight: 900; line-height: 1.45;">No more typing your name and the disclaimer on every reply. And every customer sees the same, professional signature.</span></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Why it matters &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Set it once</div>
+<div class="bl" style="animation: fromR .6s 27s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Emails stay logged on the case.</span></div>
+<div class="bl" style="animation: fromR .6s 30s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">The signature appears on its own.</span></div>
+<div class="bl" style="animation: fromR .6s 34s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">Consistent and professional.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 2 · WHO ============ -->
+<template id="scene-2">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 2: Open My Email Settings</div><div class="h2s">Two clicks from anywhere in Salesforce.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 20s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">Settings</span></div><div class="st">Avatar</div><svg class="mk" width="28" height="28" style="animation: pop .5s 23.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #FCE3CC; color: #C2410C; animation: up .6s 1.6s both, litRing 20s 24s both;"><div class="sr"><span class="sn" style="background: #C2410C;">2</span><span class="tg" style="background: #C2410C;">My Email Settings</span></div><div class="st">Email</div><svg class="mk" width="28" height="28" style="animation: pop .5s 43.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Where does it live?</div>
+<div class="win" style="animation: win 20s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #F3F3F3; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="height: 52px; background: #FFFFFF; border-bottom: 1px solid #DCE1E8; display: flex; align-items: center; gap: 14px; padding: 0 16px; justify-content: flex-end;"><span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid #8A99AD; display: inline-block;"></span><span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid #8A99AD; display: inline-block;"></span><span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid #8A99AD; display: inline-block;"></span><span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid #8A99AD; display: inline-block;"></span><span style="width: 22px; height: 22px; border-radius: 6px; border: 2px solid #8A99AD; display: inline-block;"></span><span style="position: relative; width: 34px; height: 34px; border-radius: 17px; background: #5867E8; color: #FFF; font-size: 13px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px #F6A600;">AR</span></div><div style="padding: 20px; font-size: 13px; color: #8A99AD;">Salesforce home</div><div style="position: absolute; right: 16px; top: 62px; width: 320px; background: #FFFFFF; border: 1px solid #CCC; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.18); padding: 16px; display: flex; gap: 12px; animation: pop .45s 8s both;"><span style="width: 48px; height: 48px; border-radius: 24px; background: #5867E8; color: #FFF; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">AR</span><div style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #0B2545;"><b style="font-size: 17px;">Alex Rivera</b><span style="color: #3B4F6B;">yourcompany.my.salesforce.com</span><div style="display: flex; gap: 16px; margin-top: 4px;"><span style="color: #0B5CAB; font-weight: 700; padding: 1px 4px; border-radius: 4px; box-shadow: 0 0 0 3px #F6A600; background: #FFF4D6; animation: pop .45s 10s both;">Settings</span><span style="color: #0B5CAB;">Log Out</span></div></div></div></div><div style="position: absolute; left: 626px; top: 20px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; animation: pop .45s 6s both;">1</div><div style="position: absolute; left: 330px; top: 128px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; animation: pop .45s 10.5s both;">2</div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Open your settings &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Click your avatar</div>
+<div class="bl" style="animation: fromR .6s 6s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Top right of Salesforce: your photo or initials.</span></div>
+<div class="bl" style="animation: fromR .6s 10.5s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Under your name, click Settings.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 20s 24s both;">
+<div class="shot" style="background: #F3F6FB; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 300px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 24.5s both;"><div style="padding: 10px 0;"><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Login History</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Personal Information</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Display &amp; Layout</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Connected Accounts</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545; background: #FFF4D6; box-shadow: inset 0 0 0 2px #F6A600; font-weight: 700; animation: pop .45s 26s both;">&#9662; Email</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">&nbsp;&nbsp;&nbsp;Einstein Activity Capture</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545; background: #FFF4D6; box-shadow: inset 0 0 0 2px #F6A600; font-weight: 700; animation: pop .45s 29s both;">&nbsp;&nbsp;&nbsp;My Email Settings</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">&nbsp;&nbsp;&nbsp;My Email to Salesforce</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Chatter</div><div style="padding: 7px 16px; font-size: 14px; color: #0B2545;">Calendar &amp; Reminders</div></div></div><div style="position: absolute; left: 286px; top: 160px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; animation: pop .45s 26s both;">1</div><div style="position: absolute; left: 286px; top: 228px; width: 34px; height: 34px; border-radius: 17px; background: #1466F0; color: #FFFFFF; border: 3px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,.25); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; animation: pop .45s 29s both;">2</div><div style="position: absolute; left: 340px; top: 60px; width: 340px; display: flex; flex-direction: column; gap: 8px;"><div class="row" style="height: 70px; font-size: 14.5px; animation: up .45s 26s both;"><span class="sn" style="background: #1466F0;">1</span><span>In the left menu, open <b>Email</b>.</span></div><div class="row" style="height: 70px; font-size: 14.5px; animation: up .45s 29s both;"><span class="sn" style="background: #C2410C;">2</span><span>Click <b>My Email Settings</b>.</span></div><div class="row" style="height: 70px; font-size: 14.5px; animation: up .45s 32s both;"><span class="sn" style="background: #2F7A22;">3</span><span>Scroll down to <b>Signature</b>.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Open your settings &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Email, then My Email Settings</div>
+<div class="bl" style="animation: fromR .6s 26s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Left menu: Email.</span></div>
+<div class="bl" style="animation: fromR .6s 29s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">My Email Settings.</span></div>
+<div class="bl" style="animation: fromR .6s 32s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">Scroll to the Signature box.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 3 · ESCALATE ============ -->
+<template id="scene-3">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 3: The team signature</div><div class="h2s">The same lines for everyone, with your own name.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #FCE3CC; color: #C2410C; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #C2410C;">1</span><span class="tg" style="background: #C2410C;">Your name</span></div><div class="st">Copy it</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">DO &amp; DON&rsquo;T</span></div><div class="st">Keep it standard</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">What goes in it?</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #FCE3CC; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 300px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="padding: 16px 20px;"><div style="font-family: Georgia, 'Times New Roman', serif; font-size: 13px; line-height: 1.4; color: #202124;">&mdash;<br><span style="background: #FFF4D6; box-shadow: 0 0 0 2px #F6A600; border-radius: 3px; padding: 0 3px; animation: pop .45s 8s both;">[ Full Name ]</span><br>Customer Support Specialist<br>MarketFully<br>Direct: 954-421-0890<br>www.marketfully.com<br>MarketFully LinkedIn<br>&nbsp;<br>MotionPoint | Key Content | Social Element<br>&nbsp;<br><span style="font-size: 11.5px; color: #3B4F6B;">This communication contains proprietary information and may be confidential. If you are not the intended recipient, the reading, copying, disclosure or other use of the contents of this e-mail is strictly prohibited and you are instructed to please delete this e-mail immediately.</span></div></div></div><div style="position: absolute; left: 260px; top: 46px; width: 190px; padding: 4px 10px; border-radius: 8px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,.18); animation: pop .45s 9s both;">Your full name goes here</div><div style="position: absolute; left: 20px; top: 326px; width: 660px; height: 52px; border-radius: 20px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 18px; padding: 0 30px; animation: up .7s 13s both;"><span style="font-size: 14.5px; font-weight: 900;">Click Copy signature at the top of this page, type your name, and copy it.</span></div></div>
+<div class="tc2">
+<div class="eb" style="color: #C2410C;">The team signature &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Copy it, don&rsquo;t retype it</div>
+<div class="bl" style="animation: fromR .6s 5.5s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Same lines for everyone on the team.</span></div>
+<div class="bl" style="animation: fromR .6s 9s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Only change [ Full Name ].</span></div>
+<div class="call" style="background: #0B2545; animation: pop .5s 16s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Quick tip</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">The Copy signature button fills in your name for you.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #F3F6FB; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 320px; height: 364px; border-radius: 16px; background: #E5F4DE; border: 3px solid #2F7A22; padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; animation: zoomIn .6s 26.5s both;"><span style="font-size: 15px; font-weight: 900; letter-spacing: .1em; color: #2F7A22;">DO</span><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 27.5s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #2F7A22; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#10003;</span><span>Your full name, as it shows in Salesforce and Teams.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 28.7s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #2F7A22; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#10003;</span><span>Keep the title: Customer Support Specialist.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 29.9s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #2F7A22; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#10003;</span><span>Keep every line, and the confidentiality note.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 31.1s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #2F7A22; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#10003;</span><span>Plain text: just paste it.</span></div></div><div style="position: absolute; left: 360px; top: 14px; width: 320px; height: 364px; border-radius: 16px; background: #FFF1F0; border: 3px solid #B42318; padding: 12px 14px; display: flex; flex-direction: column; gap: 7px; animation: zoomIn .6s 32.3s both;"><span style="font-size: 15px; font-weight: 900; letter-spacing: .1em; color: #B42318;">DON&rsquo;T</span><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 33.3s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #B42318; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&times;</span><span>Change the Direct number.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 34.5s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #B42318; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&times;</span><span>Add a personal phone or email.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 35.7s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #B42318; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&times;</span><span>Add quotes, emojis or images.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 7px 10px; border-radius: 10px; background: #FFFFFF; font-size: 13.5px; color: #0B2545; line-height: 1.35; animation: up .45s 36.9s both;"><span style="width: 20px; height: 20px; border-radius: 10px; background: #B42318; color: #FFFFFF; font-size: 12px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&times;</span><span>Copy a teammate&rsquo;s signature with their name.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">The team signature &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Keep it standard</div>
+<div class="bl" style="animation: fromR .6s 27.5s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Your own full name.</span></div>
+<div class="bl" style="animation: fromR .6s 30s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">Every line, as it is.</span></div>
+<div class="bl" style="animation: fromR .6s 33s both;"><span class="bn" style="background: #FFF1F0; color: #B42318;">3</span><span class="bt" style="font-size: 18px;">Nothing personal or extra.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 4 · PROTECT CASES ============ -->
+<template id="scene-4">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 4: Paste and save</div><div class="h2s">Into the Email Signature box, then Save.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">Your name</span></div><div class="st">Paste</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">Composer</span></div><div class="st">Save</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Now paste it in.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="padding: 14px 18px; display: flex; flex-direction: column; gap: 8px;"><b style="font-size: 15px; color: #0B2545;">Signature</b><span style="font-size: 12.5px; color: #3B4F6B;">This signature will be added to your outgoing emails (1333 characters max):</span><div style="display: flex; gap: 12px; align-items: flex-start;"><span style="font-size: 12px; font-weight: 700; color: #3B4F6B; width: 96px; text-align: right; padding-top: 6px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">Email Signature<span style="width: 30px; height: 30px; border-radius: 15px; background: #1466F0; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900; flex-shrink: 0; animation: pop .45s 6.5s both;">3</span></span><div style="flex: 1; height: 248px; overflow: hidden; border: 1px solid #8A99AD; border-radius: 3px; padding: 6px 8px; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 6s both;"><div style="animation: fadeIn .6s 8s both;"><div style="font-family: Georgia, 'Times New Roman', serif; font-size: 11.5px; line-height: 1.4; color: #202124;">&mdash;<br><span style="background: #FFF4D6; box-shadow: 0 0 0 2px #F6A600; border-radius: 3px; padding: 0 3px; animation: pop .45s 11s both;">Alex Rivera</span><br>Customer Support Specialist<br>MarketFully<br>Direct: 954-421-0890<br>www.marketfully.com<br>MarketFully LinkedIn<br>&nbsp;<br>MotionPoint | Key Content | Social Element<br>&nbsp;<br><span style="font-size: 10.0px; color: #3B4F6B;">This communication contains proprietary information and may be confidential. If you are not the intended recipient, the reading, copying, disclosure or other use of the contents of this e-mail is strictly prohibited and you are instructed to please delete this e-mail immediately.</span></div></div></div></div></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Paste and save &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Paste it in Email Signature</div>
+<div class="bl" style="animation: fromR .6s 6s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Click inside the Email Signature box.</span></div>
+<div class="bl" style="animation: fromR .6s 8s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Clear anything old, then paste.</span></div>
+<div class="bl" style="animation: fromR .6s 11s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">3</span><span class="bt" style="font-size: 18px;">Check your name is right.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #E5F4DE; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 26.5s both;"><div style="padding: 14px 18px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #0B2545;"><b style="font-size: 15px;">Composer</b><span style="color: #3B4F6B;">When you click an email address to compose an email, which email editor do you want to use?</span><div style="display: flex; gap: 8px; align-items: flex-start; padding: 8px; border-left: 3px solid #B42318; animation: pop .45s 28s both;"><span style="width: 14px; height: 14px; border-radius: 7px; border: 4px solid #0B5CAB; flex-shrink: 0; margin-top: 2px;"></span><span><b>Salesforce Email Composer</b><br>Send emails without leaving Salesforce. Sent emails are logged in Salesforce.</span></div><div style="display: flex; gap: 8px; align-items: flex-start; padding: 0 8px 8px 11px; color: #3B4F6B;"><span style="width: 14px; height: 14px; border-radius: 7px; border: 1.5px solid #8A99AD; flex-shrink: 0; margin-top: 2px;"></span><span><b>Default Email Application</b><br>Opens the default email application.</span></div><div style="margin-top: 14px; border-top: 1px solid #DCE1E8; padding-top: 14px; display: flex; justify-content: center; gap: 10px;"><span style="padding: 5px 12px; border: 1px solid #8A99AD; border-radius: 4px;">Cancel</span><span style="padding: 5px 14px; border: 1px solid #8A99AD; border-radius: 4px; background: #FFF4D6; box-shadow: 0 0 0 3px #F6A600; font-weight: 700; animation: pop .45s 33s both;">Save</span><span style="width: 30px; height: 30px; border-radius: 15px; background: #1466F0; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 900; flex-shrink: 0; animation: pop .45s 33.5s both;">4</span></div></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Paste and save &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">Composer, then Save</div>
+<div class="bl" style="animation: fromR .6s 28s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Keep Salesforce Email Composer selected.</span></div>
+<div class="bl" style="animation: fromR .6s 33s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">Click Save, at the bottom.</span></div>
+<div class="call" style="background: #B42318; animation: pop .5s 38s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Watch out</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Forgot to click Save? The signature won&rsquo;t show. Always save.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 5 · ANY TIME ============ -->
+<template id="scene-5">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 5: Check it on a case</div><div class="h2s">Compose an email, and see your signature.</div></div>
+<div class="sc" style="left: 40px; width: 592px; background: #DCE7F7; color: #1466F0; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #1466F0;">1</span><span class="tg" style="background: #1466F0;">Email tab</span></div><div class="st">Compose</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="sc" style="left: 648px; width: 592px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.6s both, litRing 22s 26s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">2</span><span class="tg" style="background: #2F7A22;">Done</span></div><div class="st">Signed</div><svg class="mk" width="28" height="28" style="animation: pop .5s 47.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">Let&rsquo;s test it.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #DCE7F7; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 240px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 4.5s both;"><div style="padding: 14px 18px; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #0B2545;"><div style="display: flex; gap: 22px; font-size: 15px; border-bottom: 1px solid #DCE1E8; padding-bottom: 8px;"><b style="border-bottom: 3px solid #0B5CAB; padding-bottom: 6px;">Feed</b><span>Case History</span><span>Time Entry</span></div><div style="background: #D97706; color: #FFF; text-align: center; padding: 7px; font-size: 13px; font-weight: 700;">Use Post only. Do not use the comment feature.</div><div style="border: 1px solid #DCE1E8; border-radius: 6px;"><div style="display: flex; gap: 0; background: #F3F3F3; border-bottom: 1px solid #DCE1E8;"><span style="padding: 7px 14px; background: #FFF; font-weight: 700; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 6s both;">Email</span><span style="padding: 7px 14px;">Post</span><span style="padding: 7px 14px;">Track &amp; Reassign</span></div><div style="display: flex; gap: 10px; padding: 12px;"><span style="flex: 1; border: 1px solid #DCE1E8; border-radius: 4px; padding: 8px; color: #8A99AD; text-align: center;">Write an email&hellip;</span><span style="padding: 8px 18px; border-radius: 4px; background: #0B5CAB; color: #FFF; font-weight: 700; box-shadow: 0 0 0 3px #F6A600; animation: pop .45s 9s both;">Compose</span></div></div></div></div><div style="position: absolute; left: 20px; top: 270px; width: 660px; display: flex; flex-direction: column; gap: 8px;"><div class="row" style="height: 50px; font-size: 14.5px; animation: up .45s 6s both;"><span class="sn" style="background: #1466F0;">1</span><span>Open any case, then the <b>Feed</b> tab.</span></div><div class="row" style="height: 50px; font-size: 14.5px; animation: up .45s 9s both;"><span class="sn" style="background: #C2410C;">2</span><span>Click the <b>Email</b> tab, then <b>Compose</b>.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Check it on a case &middot; 1 of 2</div>
+<div class="tt" style="font-size: 26px;">Compose an email</div>
+<div class="bl" style="animation: fromR .6s 6s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Case &rsaquo; Feed &rsaquo; Email.</span></div>
+<div class="bl" style="animation: fromR .6s 9s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">2</span><span class="bt" style="font-size: 18px;">Click Compose.</span></div>
+<div class="call" style="background: #0B2545; animation: pop .5s 16s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">Remember</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Notes to the team go in a Post, never the comment feature.</span></div>
+</div>
+</div>
+<div class="win" style="animation: win 22s 26s both;">
+<div class="shot" style="background: #E5F4DE; display: block;"><div class="wc" style="left: 20px; top: 14px; width: 660px; height: 364px; background: #FFFFFF; overflow: hidden; animation: zoomIn .6s 26.5s both;"><div style="height: 30px; background: #F3F3F3; border-bottom: 1px solid #DCE1E8; display: flex; align-items: center; gap: 8px; padding: 0 10px;"><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span><span style="width: 18px; height: 14px; border: 1px solid #8A99AD; border-radius: 3px;"></span></div><div style="padding: 12px 16px;"><div style="height: 30px;"></div><div style="animation: fadeIn .6s 28s both;"><div style="font-family: Georgia, 'Times New Roman', serif; font-size: 12px; line-height: 1.4; color: #202124;">&mdash;<br>Alex Rivera<br>Customer Support Specialist<br>MarketFully<br>Direct: 954-421-0890<br>www.marketfully.com<br>MarketFully LinkedIn<br>&nbsp;<br>MotionPoint | Key Content | Social Element<br>&nbsp;<br><span style="font-size: 10.5px; color: #3B4F6B;">This communication contains proprietary information and may be confidential. If you are not the intended recipient, the reading, copying, disclosure or other use of the contents of this e-mail is strictly prohibited and you are instructed to please delete this e-mail immediately.</span></div></div></div></div><div style="position: absolute; left: 470px; top: 120px; width: 64px; height: 64px; border-radius: 32px; background: #2F7A22; color: #FFF; display: flex; align-items: center; justify-content: center; animation: pop .5s 31s both;"><svg width="36" height="36"><use href="#dc-check"></use></svg></div></div>
+<div class="tc2">
+<div class="eb" style="color: #2F7A22;">Check it on a case &middot; 2 of 2</div>
+<div class="tt" style="font-size: 26px;">There it is</div>
+<div class="bl" style="animation: fromR .6s 29s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">1</span><span class="bt" style="font-size: 18px;">Your signature is already at the bottom.</span></div>
+<div class="bl" style="animation: fromR .6s 32s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">2</span><span class="bt" style="font-size: 18px;">Write your message above it.</span></div>
+<div class="call" style="background: #C2410C; animation: pop .5s 37s both;"><span class="lab" style="color: #FFFFFF; opacity: .8;">If not</span><span style="font-size: 18px; font-weight: 900; line-height: 1.35;">Not showing? Check you clicked Save, then refresh the case page. Still missing? Ask Tier II.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 6 · FOLLOW UP ============ -->
+<template id="scene-6">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 6: Good to know</div><div class="h2s">Small things that keep it right.</div></div>
+<div class="sc" style="left: 40px; width: 1200px; background: #E5F4DE; color: #2F7A22; animation: up .6s 1.4s both, litRing 22s 4s both;"><div class="sr"><span class="sn" style="background: #2F7A22;">1</span><span class="tg" style="background: #2F7A22;">Keep it right</span></div><div class="st">Tips</div><svg class="mk" width="28" height="28" style="animation: pop .5s 25.4s both;"><use href="#dc-check"></use></svg></div>
+<div class="panel" style="animation: up .7s 2.2s both;">
+<div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #8A99AD; animation: fadeOut .5s 3.8s forwards;">A few tips.</div>
+<div class="win" style="animation: win 22s 4s both;">
+<div class="shot" style="background: #F3F6FB; display: block;"><div style="position: absolute; left: 20px; top: 14px; width: 660px; display: flex; flex-direction: column; gap: 8px;"><div class="row" style="height: 58px; font-size: 14.5px; animation: up .45s 5s both;"><span class="sn" style="background: #1466F0;">1</span><span>Started a new role, or your name changed? Update your signature the same way.</span></div><div class="row" style="height: 58px; font-size: 14.5px; animation: up .45s 7s both;"><span class="sn" style="background: #1466F0;">2</span><span>The signature is <b>plain text</b>. Links and bold aren&rsquo;t needed.</span></div><div class="row" style="height: 58px; font-size: 14.5px; animation: up .45s 9s both;"><span class="sn" style="background: #2F7A22;">3</span><span>Keep it under <b>1333 characters</b>. The team signature fits easily.</span></div><div class="row" style="height: 58px; font-size: 14.5px; animation: up .45s 11s both;"><span class="sn" style="background: #C2410C;">4</span><span>Write your message <b>above</b> the signature, never below it.</span></div><div class="row" style="height: 58px; font-size: 14.5px; animation: up .45s 13s both;"><span class="sn" style="background: #B42318;">5</span><span>Unsure about a line? Ask before you change it.</span></div></div></div>
+<div class="tc2">
+<div class="eb" style="color: #1466F0;">Good to know &middot; 1 of 1</div>
+<div class="tt" style="font-size: 26px;">A few small tips</div>
+<div class="bl" style="animation: fromR .6s 5s both;"><span class="bn" style="background: #DCE7F7; color: #1466F0;">1</span><span class="bt" style="font-size: 18px;">Update it when things change.</span></div>
+<div class="bl" style="animation: fromR .6s 7s both;"><span class="bn" style="background: #E5F4DE; color: #2F7A22;">2</span><span class="bt" style="font-size: 18px;">Plain text, under 1333 characters.</span></div>
+<div class="bl" style="animation: fromR .6s 11s both;"><span class="bn" style="background: #FCE3CC; color: #C2410C;">3</span><span class="bt" style="font-size: 18px;">Your message goes above it.</span></div>
+</div>
+</div>
+</div>
+</div>
+</template>
+
+<!-- ============ SCENE 7 · PRACTICE ============ -->
+<template id="scene-7">
+<div style="position: absolute; left: 0; top: 72px; width: 1280px; height: 648px;">
+<div class="sh" style="animation: up .6s .2s both;"><div class="h2">Part 7: Practice. What would you do?</div><div class="h2s">Think of your answer before it appears.</div></div>
+<div style="position: absolute; left: 160px; top: 80px; width: 960px; height: 520px; animation: win 10s 4s both;"><div class="wc" style="left: 0; top: 0; width: 960px; height: 190px; padding: 26px 32px; display: flex; flex-direction: column; gap: 12px;"><span class="lab">Question 1</span><span class="disp" style="font-size: 26px; font-weight: 600; color: #0B2545; line-height: 1.35;">Where do you set your email signature in Salesforce?</span></div><div style="position: absolute; left: 0; top: 220px; width: 960px; min-height: 120px; border-radius: 18px; background: #DCE7F7; border: 3px solid #1466F0; padding: 22px 28px; display: flex; align-items: center; gap: 18px; animation: pop .5s 9s both;"><svg width="40" height="40" style="flex-shrink: 0;"><use href="#dc-check"></use></svg><span style="font-size: 23px; font-weight: 900; color: #0B2545; line-height: 1.4;">Your avatar &rsaquo; Settings &rsaquo; Email &rsaquo; My Email Settings &rsaquo; Signature.</span></div></div>
+<div style="position: absolute; left: 160px; top: 80px; width: 960px; height: 520px; animation: win 10s 14s both;"><div class="wc" style="left: 0; top: 0; width: 960px; height: 190px; padding: 26px 32px; display: flex; flex-direction: column; gap: 12px;"><span class="lab">Question 2</span><span class="disp" style="font-size: 26px; font-weight: 600; color: #0B2545; line-height: 1.35;">You copied the team signature. What do you change?</span></div><div style="position: absolute; left: 0; top: 220px; width: 960px; min-height: 120px; border-radius: 18px; background: #FCE3CC; border: 3px solid #C2410C; padding: 22px 28px; display: flex; align-items: center; gap: 18px; animation: pop .5s 19s both;"><svg width="40" height="40" style="flex-shrink: 0;"><use href="#dc-check"></use></svg><span style="font-size: 23px; font-weight: 900; color: #0B2545; line-height: 1.4;">Only [ Full Name ]: your full name, as it shows in Salesforce and Teams.</span></div></div>
+<div style="position: absolute; left: 160px; top: 80px; width: 960px; height: 520px; animation: win 10s 24s both;"><div class="wc" style="left: 0; top: 0; width: 960px; height: 190px; padding: 26px 32px; display: flex; flex-direction: column; gap: 12px;"><span class="lab">Question 3</span><span class="disp" style="font-size: 26px; font-weight: 600; color: #0B2545; line-height: 1.35;">You pasted it, but it doesn&rsquo;t show when you compose an email.</span></div><div style="position: absolute; left: 0; top: 220px; width: 960px; min-height: 120px; border-radius: 18px; background: #FFF1F0; border: 3px solid #B42318; padding: 22px 28px; display: flex; align-items: center; gap: 18px; animation: pop .5s 29s both;"><svg width="40" height="40" style="flex-shrink: 0;"><use href="#dc-check"></use></svg><span style="font-size: 23px; font-weight: 900; color: #0B2545; line-height: 1.4;">You probably didn&rsquo;t click Save. Save, then refresh the case page.</span></div></div>
+<div style="position: absolute; left: 160px; top: 80px; width: 960px; height: 520px; animation: win 10s 34s both;"><div class="wc" style="left: 0; top: 0; width: 960px; height: 190px; padding: 26px 32px; display: flex; flex-direction: column; gap: 12px;"><span class="lab">Question 4</span><span class="disp" style="font-size: 26px; font-weight: 600; color: #0B2545; line-height: 1.35;">Which composer should stay selected?</span></div><div style="position: absolute; left: 0; top: 220px; width: 960px; min-height: 120px; border-radius: 18px; background: #DCE7F7; border: 3px solid #1466F0; padding: 22px 28px; display: flex; align-items: center; gap: 18px; animation: pop .5s 39s both;"><svg width="40" height="40" style="flex-shrink: 0;"><use href="#dc-check"></use></svg><span style="font-size: 23px; font-weight: 900; color: #0B2545; line-height: 1.4;">Salesforce Email Composer, so emails are sent and logged on the case.</span></div></div>
+<div style="position: absolute; left: 160px; top: 80px; width: 960px; height: 520px; animation: win 10s 44s both;"><div class="wc" style="left: 0; top: 0; width: 960px; height: 190px; padding: 26px 32px; display: flex; flex-direction: column; gap: 12px;"><span class="lab">Question 5</span><span class="disp" style="font-size: 26px; font-weight: 600; color: #0B2545; line-height: 1.35;">Can you add your personal mobile number to it?</span></div><div style="position: absolute; left: 0; top: 220px; width: 960px; min-height: 120px; border-radius: 18px; background: #FFF1F0; border: 3px solid #B42318; padding: 22px 28px; display: flex; align-items: center; gap: 18px; animation: pop .5s 49s both;"><svg width="40" height="40" style="flex-shrink: 0;"><use href="#dc-check"></use></svg><span style="font-size: 23px; font-weight: 900; color: #0B2545; line-height: 1.4;">No. Keep the team signature as it is, with only your name changed.</span></div></div>
+<div style="position: absolute; left: 40px; top: 66px; width: 1200px; height: 566px; border-radius: 22px; background: #DCE7F7; padding: 22px 26px; display: flex; flex-direction: column; gap: 10px; animation: pop .6s 56s both;"><span class="disp" style="font-size: 26px; font-weight: 700; color: #0B2545; margin-bottom: 4px;">Recap: your email signature</span><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 57.5s both;"><span class="sn" style="background: #1466F0;">1</span><span><b>Where:</b> avatar &rsaquo; Settings &rsaquo; Email &rsaquo; My Email Settings</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 59.7s both;"><span class="sn" style="background: #1466F0;">2</span><span><b>What:</b> the team signature, with your own full name</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 61.9s both;"><span class="sn" style="background: #1466F0;">3</span><span><b>How:</b> paste it in Email Signature, keep Salesforce Email Composer</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 64.1s both;"><span class="sn" style="background: #1466F0;">4</span><span><b>Then:</b> click Save</span></div><div class="row" style="height: 70px; font-size: 18px; font-weight: 700; animation: up .5s 66.3s both;"><span class="sn" style="background: #1466F0;">5</span><span><b>Check:</b> case &rsaquo; Feed &rsaquo; Email &rsaquo; Compose</span></div><div style="margin-top: auto; padding: 14px 20px; border-radius: 14px; background: #0B2545; color: #FFFFFF; font-size: 20px; font-weight: 900; animation: pop .5s 70s both;">Set it once. If in doubt, ask: Support team, Tier II or Director of Customer Support.</div></div>
+</div>
+</template>
+
+<div id="sceneHost" style="position: absolute; inset: 0;"></div>
+
+<!-- ============ COVER ============ -->
+<div id="cover">
+<div style="position: absolute; inset: 0; background: #0B2545; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; color: #FFFFFF;">
+<div style="font-size: 16px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; color: #8FD16F;">MotionPoint Support &middot; New Agent Training</div>
+<h1 class="disp" style="margin: 0; font-size: 64px; line-height: 1.05; font-weight: 700;">Your Email Signature in Salesforce</h1>
+<p style="margin: 0; font-size: 22px; color: #C9D6E8; max-width: 800px;">Where to set your email signature in Salesforce, the team signature to copy, and how to check it on a case. About 6 minutes, with background music.</p>
+<button type="button" id="coverPlay" style="margin-top: 14px; height: 72px; padding: 0 40px; border-radius: 36px; border: none; background: #1466F0; color: #FFFFFF; font-family: 'Lexend', sans-serif; font-size: 26px; font-weight: 600; display: flex; align-items: center; gap: 14px; cursor: pointer; box-shadow: 0 16px 40px rgba(20,102,240,.45);">
+<svg width="26" height="26" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#FFFFFF"></path></svg>Play</button>
+</div>
+</div>
+
+</div>
+
+<!-- ===================== SUBTITLES ===================== -->
+<div style="height: 70px; flex-shrink: 0; background: #0B1626; display: flex; align-items: center; justify-content: center; padding: 0 48px; position: relative; overflow: hidden;">
+<div id="subs" style="display: contents;"></div>
+</div>
+
+<!-- ===================== CONTROLS ===================== -->
+<div style="height: 80px; flex-shrink: 0; background: #0E1B2E; display: flex; flex-direction: column;">
+<div style="height: 6px; background: #1D2E48;"><div id="prog" style="height: 6px; width: 0%; background: #5DB645;"></div></div>
+<div style="flex-grow: 1; display: flex; align-items: center; gap: 10px; padding: 0 20px;">
+<button type="button" class="ctl main" id="playBtn" aria-label="Play">
+<span id="icoPause" style="display: contents;" hidden><svg width="18" height="18" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4" height="15" rx="1" fill="#FFFFFF"></rect><rect x="14" y="4.5" width="4" height="15" rx="1" fill="#FFFFFF"></rect></svg></span>
+<span id="icoPlay" style="display: contents;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#FFFFFF"></path></svg></span>
+<span id="playLabel">Play</span>
+</button>
+<button type="button" class="ctl" id="replayBtn" aria-label="Replay from start">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg>
+</button>
+<button type="button" class="ctl" id="back10Btn" aria-label="Back 10 seconds" title="Back 10 seconds (Left arrow)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17l-5-5 5-5"></path><path d="M18 17l-5-5 5-5"></path></svg>
+<span>10s</span>
+</button>
+<button type="button" class="ctl" id="fwd10Btn" aria-label="Forward 10 seconds" title="Forward 10 seconds (Right arrow)">
+<span>10s</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5"></path><path d="M6 17l5-5-5-5"></path></svg>
+</button>
+<button type="button" class="ctl" id="musicBtn" aria-label="Music on" aria-pressed="true">
+<span id="icoMusicOn" style="display: contents;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FD16F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle></svg></span>
+<span id="icoMusicOff" style="display: contents;" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A9B8CC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="17" cy="16" r="3"></circle><path d="M3 3l18 18"></path></svg></span>
+<span id="musicLabel" style="display:none">Music on</span>
+</button>
+<button type="button" class="ctl" id="subsBtn" aria-label="Hide captions" aria-pressed="true">
+<svg width="22" height="18" viewBox="0 0 26 20" fill="none" id="subsIcon" stroke="#8FD16F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="1.5" width="23" height="17" rx="3"></rect><path d="M11 8.2a3 3 0 1 0 0 3.6"></path><path d="M19 8.2a3 3 0 1 0 0 3.6"></path></svg>
+</button>
+<button type="button" class="ctl" id="prevBtn" aria-label="Previous scene">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+</button>
+<button type="button" class="ctl" id="nextBtn" aria-label="Next scene">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E6EEF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+</button>
+<div style="width: 1px; height: 30px; background: #2A3E5C; margin: 0 4px;"></div>
+<div style="display: flex; gap: 4px; flex-grow: 1; overflow: hidden;">
+<span id="chapters" style="display: contents;"></span>
+</div>
+<div style="font-size: 14px; font-weight: 700; color: #A9B8CC; white-space: nowrap; font-variant-numeric: tabular-nums;" id="timeLabel">0:00</div>
+</div>
+</div>
+
+
+</div>
+</div>
+<script>
+const STEP_HTML = "<div style=\"height: 52px; padding: 0 18px 0 6px; border-radius: 26px; background: #0B2545; color: #FFFFFF; display: flex; align-items: center; gap: 10px; box-shadow: 0 6px 16px rgba(11,37,69,.22); animation: pop 0.78s ease both;\">\n<span class=\"disp\" style=\"width: 40px; height: 40px; border-radius: 20px; background: #5DB645; color: #0B2545; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;\">{{st.n}}</span>\n<span style=\"font-size: 15px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;\">Part {{st.n}} of 7</span>\n</div>";
+const SUB_OPEN = "<div style=\"position: absolute; left: 48px; right: 48px; top: 0; height: 70px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 22px; line-height: 1.3; font-weight: 700; color: #F4F7FB; animation: up 0.7s ease both;\">";
+function fit(){ const s = Math.min(window.innerWidth / 1280, window.innerHeight / 870); document.getElementById('fit').style.transform = 'scale(' + s + ')'; }
+window.addEventListener('resize', fit); fit();
+class Player {
+  constructor() {
+    this.state = { scene: 0, el: 0, playing: false, started: false, ended: false, music: true, subsOn: true };
+    this.ctx = null;
+  }
+  durs() { return [26000, 48000, 44000, 48000, 48000, 48000, 26000, 80000]; }
+  subLines() {
+    return [[[0, "Welcome! This video shows you how to set up your email signature in Salesforce."], [5000, "It lives in your settings: Email, then My Email Settings."], [9000, "You copy the team signature, and add your own full name."], [13000, "Then you check it by composing an email on a case."], [18000, "It takes about five minutes, one time. Use the Copy signature button at the top of this page."]],
+      [[0, "Part 1: why a signature?"], [5000, "Every email you send to a customer ends the same way."], [8000, "Who you are, your team, how to reach us, and the confidentiality note."], [26000, "When you email from a case, you use the Salesforce Email Composer. The email is logged on the case, for everyone to see."], [32000, "Save your signature once, and it shows at the bottom of every new email you compose."], [38000, "No more typing your name and the disclaimer on every reply."]],
+      [[0, "Part 2: open My Email Settings."], [5000, "At the top right of Salesforce, click your avatar: your photo, or your initials."], [10000, "Under your name, click Settings."], [24000, "In the left menu, open Email."], [27000, "Then click My Email Settings."], [31000, "Scroll down to the Signature box."]],
+      [[0, "Part 3: the team signature."], [5000, "Everyone on the team uses the same lines. Copy them, don't retype them."], [9000, "The only thing you change is Full Name: put your own full name there."], [16000, "The Copy signature button at the top of this page fills in your name for you."], [26000, "Use your full name, as it shows in Salesforce and Teams. Keep the title: Customer Support Specialist."], [32000, "Keep every line, and the confidentiality note."], [36000, "Don't change the Direct number, and don't add a personal phone, email, quotes, emojis, or images."]],
+      [[0, "Part 4: paste and save."], [5000, "Click inside the Email Signature box. Clear anything old, then paste."], [11000, "Check that your name is right."], [26000, "Below it, under Composer, keep Salesforce Email Composer selected."], [31000, "Then click Save, at the bottom of the page."], [38000, "If you forget to save, the signature won't show."]],
+      [[0, "Part 5: check it on a case."], [5000, "Open any case, and go to the Feed tab."], [9000, "Click the Email tab, then Compose."], [16000, "Remember: notes to the team go in a Post, never the comment feature."], [26000, "There it is. Your signature is already at the bottom of the email."], [31000, "Write your message above it."], [36000, "Not showing? Check you clicked Save, then refresh the case page. Still missing? Ask Tier II."]],
+      [[0, "Part 6: good to know."], [5000, "Started a new role, or your name changed? Update your signature the same way."], [9000, "The signature is plain text, so links and bold aren't needed. And keep it under 1333 characters. The team signature fits easily."], [17000, "Write your message above the signature, never below it. And if you're unsure about a line, ask before you change it."]],
+      [[0, "Part 7: practice. What would you do?"], [4000, "Where do you set your email signature in Salesforce?"], [9000, "Your avatar, Settings, Email, My Email Settings, then Signature."], [14000, "You copied the team signature. What do you change?"], [19000, "Only Full Name: your full name, as it shows in Salesforce and Teams."], [24000, "You pasted it, but it doesn't show when you compose an email."], [29000, "You probably didn't click Save. Save it, then refresh the case page."], [34000, "Which composer should stay selected?"], [39000, "Salesforce Email Composer, so emails are sent and logged on the case."], [44000, "Can you add your personal mobile number to it?"], [49000, "No. Keep the team signature as it is, with only your name changed."], [56000, "Quick recap."], [70000, "Set it once. If in doubt, ask the Support team, Tier II, or the Director of Customer Support. Thanks for watching!"]]];
+  }
+  labels() { return ["Intro", "Why", "Settings", "Signature", "Save", "Check", "Tips", "Practice"]; }
+
+  /* ---------- original background jazz, synthesized live ---------- */
+  bars() {
+    // [bass walk (MIDI), chord voicing (MIDI)] — ii-V-I in F with turnarounds, 80 bpm swing
+    return [
+      [[43, 46, 50, 47], [58, 62, 65, 69]], // Gm9
+      [[48, 46, 43, 40], [58, 62, 64, 69]], // C13
+      [[41, 45, 48, 49], [57, 60, 64, 67]], // Fmaj9
+      [[50, 48, 45, 44], [54, 60, 64, 69]], // D9
+      [[43, 46, 50, 47], [58, 62, 65, 69]], // Gm9
+      [[48, 46, 43, 40], [58, 62, 64, 69]], // C13
+      [[45, 48, 52, 51], [60, 64, 67, 71]], // Am9
+      [[50, 48, 45, 44], [54, 60, 64, 69]]  // D9
+    ];
+  }
+  hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
+  initAudio() {
+    if (this.ctx) return true;
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      const ctx = new AC();
+      const master = ctx.createGain();
+      master.gain.value = 0;
+      master.connect(ctx.destination);
+      const len = Math.floor(ctx.sampleRate * 1.0);
+      const noise = ctx.createBuffer(1, len, ctx.sampleRate);
+      const data = noise.getChannelData(0);
+      for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+      this.ctx = ctx; this.master = master; this.noise = noise;
+      this.beat = 0; this.nextT = 0;
+      return true;
+    } catch (e) { return false; }
+  }
+  pianoNote(m, t, vel, dur) {
+    const c = this.ctx;
+    const f = this.hz(m);
+    const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(2600, t); lp.frequency.exponentialRampToValueAtTime(900, t + dur);
+    const g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vel, t + 0.006);
+    g.gain.exponentialRampToValueAtTime(vel * 0.3, t + 0.4);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    lp.connect(g); g.connect(this.master);
+    [[1, 1], [2, 0.28], [3, 0.08]].forEach((h) => {
+      const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = f * h[0];
+      const hg = c.createGain(); hg.gain.value = h[1];
+      o.connect(hg); hg.connect(lp);
+      o.start(t); o.stop(t + dur + 0.05);
+    });
+  }
+  pianoChord(notes, t, vel, dur) {
+    notes.forEach((m, i) => this.pianoNote(m, t + i * 0.018, vel, dur));
+  }
+  tap(t, vol, dur, freq) {
+    const c = this.ctx;
+    const s = c.createBufferSource(); s.buffer = this.noise;
+    const f = c.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = freq;
+    const g = c.createGain();
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f); f.connect(g); g.connect(this.master);
+    s.start(t); s.stop(t + dur + 0.02);
+  }
+  scheduleBeat(i, t) {
+    const spb = 60 / 80;
+    const sw = spb * 2 / 3;
+    const barIx = Math.floor(i / 4) % 8;
+    const bar = this.bars()[barIx];
+    const b = i % 4;
+    this.tap(t, 0.014, 0.25, 7500);
+    if (b === 1 || b === 3) {
+      this.tap(t + sw, 0.01, 0.18, 7500);
+      this.tap(t, 0.012, 0.05, 9500);
+    }
+    if (b === 0) {
+      this.pianoNote(bar[0][0] + 12, t, 0.05, 2.4);
+      this.pianoChord(bar[1], t + 0.03, 0.028, 2.2);
+    }
+    const v = Math.floor(i / 4) % 2;
+    if (b === 2 && v === 0) this.pianoChord(bar[1], t + sw, 0.018, 1.2);
+    if (b === 1 && v === 1) this.pianoChord(bar[1], t + sw, 0.018, 1.2);
+  }
+  schedule() {
+    const c = this.ctx;
+    if (!c || c.state !== 'running' || !this.musicLive) return;
+    if (this.nextT < c.currentTime) this.nextT = c.currentTime + 0.05;
+    while (this.nextT < c.currentTime + 0.3) {
+      this.scheduleBeat(this.beat, this.nextT);
+      this.beat = (this.beat + 1) % 32;
+      this.nextT += 60 / 80;
+    }
+  }
+  musicStart() {
+    if (!this.state.music || !this.initAudio()) return;
+    const c = this.ctx;
+    try { c.resume(); } catch (e) {}
+    if (!this.musicLive) {
+      this.musicLive = true;
+      this.beat = 0;
+      this.nextT = c.currentTime + 0.1;
+      this.master.gain.cancelScheduledValues(c.currentTime);
+      this.master.gain.setValueAtTime(0.0001, c.currentTime);
+      this.master.gain.exponentialRampToValueAtTime(0.55, c.currentTime + 1.5);
+    }
+  }
+  musicStop(fade) {
+    if (!this.ctx) return;
+    const c = this.ctx;
+    this.musicLive = false;
+    const now = c.currentTime;
+    this.master.gain.cancelScheduledValues(now);
+    this.master.gain.setValueAtTime(Math.max(this.master.gain.value, 0.0001), now);
+    this.master.gain.exponentialRampToValueAtTime(0.0001, now + (fade || 0.3));
+  }
+  musicPause() { if (this.ctx) { try { this.ctx.suspend(); } catch (e) {} } }
+  musicResume() { if (this.ctx && this.state.music) { try { this.ctx.resume(); } catch (e) {} } }
+
+  componentDidMount() {
+    this.iv = setInterval(() => this.tick(), 200);
+    this.au = setInterval(() => this.schedule(), 60);
+  }
+  componentWillUnmount() {
+    clearInterval(this.iv); clearInterval(this.au); clearTimeout(this.to);
+    if (this.ctx) { try { this.ctx.close(); } catch (e) {} }
+  }
+  tick() {
+    const s = this.state;
+    if (!s.playing || s.scene < 0) return;
+    const d = this.durs();
+    const el = s.el + 200;
+    if (el >= d[s.scene]) {
+      if (s.scene < d.length - 1) this.setState({ scene: s.scene + 1, el: 0 });
+      else { this.setState({ el: d[s.scene], playing: false, ended: true }); this.musicStop(3); }
+    } else {
+      this.setState({ el: el });
+    }
+  }
+  go(i, off) {
+    off = off || 0;
+    clearTimeout(this.to);
+    this.musicStart();
+    this.musicResume();
+    this.setState({ scene: -1, el: 0 });
+    this.to = setTimeout(() => {
+      this.setState({ scene: i, el: off, started: true, playing: true, ended: false });
+      if (off) setTimeout(() => this.sync(off), 60);
+    }, 40);
+  }
+  sync(off) {
+    try {
+      const st = document.querySelector('.stage');
+      if (!st || !st.getAnimations) return;
+      st.getAnimations({ subtree: true }).forEach((a) => { try { a.currentTime = off; } catch (e) {} });
+    } catch (e) {}
+  }
+  jump(delta) {
+    const d = this.durs();
+    const s = this.state;
+    const cur = s.scene < 0 ? 0 : s.scene;
+    let t = 0;
+    for (let i = 0; i < cur; i++) t += d[i];
+    t += (s.scene < 0 || !s.started) ? 0 : s.el;
+    const total = d.reduce((a, b) => a + b, 0);
+    t = Math.max(0, Math.min(t + delta, total - 500));
+    let i = 0;
+    while (i < d.length - 1 && t >= d[i]) { t -= d[i]; i++; }
+    this.go(i, t);
+  }
+  fmt(ms) {
+    const t = Math.floor(ms / 1000);
+    const m = Math.floor(t / 60);
+    const sec = t % 60;
+    return m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+  renderVals() {
+    const s = this.state;
+    const d = this.durs();
+    const total = d.reduce((a, b) => a + b, 0);
+    const cur = s.scene < 0 ? 0 : s.scene;
+    let done = 0;
+    for (let i = 0; i < cur; i++) done += d[i];
+    done += s.scene < 0 ? 0 : s.el;
+    const vis = s.started ? s.scene : -2;
+    const chapters = this.labels().map((label, i) => ({
+      label: label,
+      cls: s.started && i === cur ? 'on' : (s.started && i < cur ? 'done' : ''),
+      go: () => this.go(i)
+    }));
+    return {
+      s0: vis === 0, s1: vis === 1, s2: vis === 2, s3: vis === 3, s4: vis === 4, s5: vis === 5, s6: vis === 6, s7: vis === 7,
+      showCover: !s.started,
+      pauseCls: s.playing ? '' : 'paused',
+      isPlaying: s.playing,
+      notPlaying: !s.playing,
+      playLabel: s.playing ? 'Pause' : (s.ended ? 'Replay' : 'Play'),
+      progressW: (Math.min(1, done / total) * 100).toFixed(2) + '%',
+      timeLabel: this.fmt(done) + ' / ' + this.fmt(total),
+      chapters: chapters,
+      steps: [1, 2, 3, 4, 5, 6, 7].map((n) => ({ n: n, on: s.started && s.scene >= 0 && s.scene === n })),
+      showSubs: s.subsOn && s.started,
+      subs: (() => {
+        const L = s.scene >= 0 ? this.subLines()[s.scene] : [];
+        let act = -1;
+        L.forEach((c, i) => { if (s.el >= c[0]) act = i; });
+        return L.map((c, i) => ({ text: c[1], on: i === act }));
+      })(),
+      subsOn: s.subsOn,
+      subsLabel: s.subsOn ? 'Hide captions' : 'Show captions',
+      subsColor: s.subsOn ? '#8FD16F' : '#A9B8CC',
+      toggleSubs: () => this.setState({ subsOn: !this.state.subsOn }),
+      musicOn: s.music,
+      musicOff: !s.music,
+      musicLabel: s.music ? 'Music on' : 'Music off',
+      toggleMusic: () => {
+        const on = !this.state.music;
+        this.setState({ music: on }, () => {
+          if (!on) this.musicStop(0.6);
+          else if (this.state.playing) this.musicStart();
+        });
+      },
+      togglePlay: () => {
+        if (!this.state.started || this.state.ended) this.go(0);
+        else {
+          const playing = !this.state.playing;
+          if (playing) this.musicResume(); else this.musicPause();
+          this.setState({ playing: playing });
+        }
+      },
+      replay: () => this.go(0),
+      back10: () => this.jump(-10000),
+      fwd10: () => this.jump(10000),
+      prev: () => this.go(Math.max(0, cur - 1)),
+      next: () => this.go(Math.min(d.length - 1, cur + 1))
+    };
+  }
+}
+
+Player.prototype.setState = function (obj, cb) { Object.assign(this.state, obj); this.render(); if (cb) cb(); };
+Player.prototype.render = function () {
+  const v = this.renderVals();
+  const $ = (id) => document.getElementById(id);
+  const s = this.state;
+  const vis = s.started ? s.scene : -2;
+  if (vis !== this._vis) {
+    this._vis = vis;
+    const tpl = $('scene-' + vis);
+    $('sceneHost').innerHTML = tpl ? tpl.innerHTML : '';
+  }
+  $('stage').classList.toggle('paused', !s.playing);
+  $('cover').hidden = !v.showCover;
+  const st = v.steps.find((x) => x.on);
+  const stn = st ? st.n : 0;
+  if (stn !== this._step) { this._step = stn; $('steps').innerHTML = stn ? STEP_HTML.split('{{st.n}}').join(String(stn)) : ''; }
+  const sb = v.showSubs ? v.subs.find((x) => x.on) : null;
+  const key = sb ? s.scene + '|' + sb.text : '';
+  if (key !== this._sub) {
+    this._sub = key;
+    $('subs').innerHTML = '';
+    if (sb) { const d = document.createElement('div'); d.innerHTML = SUB_OPEN + '</div>'; d.firstChild.textContent = sb.text; $('subs').appendChild(d.firstChild); }
+  }
+  $('prog').style.width = v.progressW;
+  $('timeLabel').textContent = v.timeLabel;
+  $('playLabel').textContent = v.playLabel;
+  $('playBtn').setAttribute('aria-label', v.playLabel);
+  $('icoPause').hidden = !v.isPlaying; $('icoPlay').hidden = v.isPlaying;
+  $('musicLabel').textContent = v.musicLabel; $('musicBtn').setAttribute('aria-label', v.musicLabel); $('musicBtn').setAttribute('aria-pressed', String(v.musicOn));
+  $('icoMusicOn').hidden = !v.musicOn; $('icoMusicOff').hidden = v.musicOn;
+  $('subsBtn').setAttribute('aria-label', v.subsLabel); $('subsBtn').setAttribute('aria-pressed', String(v.subsOn)); $('subsIcon').setAttribute('stroke', v.subsColor);
+  const ck = v.chapters.map((c) => c.cls).join(',');
+  if (ck !== this._chips) {
+    this._chips = ck;
+    const host = $('chapters'); host.innerHTML = '';
+    v.chapters.forEach((c, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'chip ' + c.cls; b.textContent = c.label;
+      b.addEventListener('click', () => this.go(i)); host.appendChild(b);
+    });
+  }
+};
+const P = new Player();
+const call = (k) => () => P.renderVals()[k]();
+document.getElementById('coverPlay').addEventListener('click', call('togglePlay'));
+document.getElementById('playBtn').addEventListener('click', call('togglePlay'));
+document.getElementById('replayBtn').addEventListener('click', call('replay'));
+document.getElementById('prevBtn').addEventListener('click', call('prev'));
+document.getElementById('back10Btn').addEventListener('click', call('back10'));
+document.getElementById('fwd10Btn').addEventListener('click', call('fwd10'));
+document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') { e.preventDefault(); call('back10')(); } else if (e.key === 'ArrowRight') { e.preventDefault(); call('fwd10')(); } else if (e.key === ' ' && e.target === document.body) { e.preventDefault(); call('togglePlay')(); } });
+document.getElementById('nextBtn').addEventListener('click', call('next'));
+document.getElementById('musicBtn').addEventListener('click', call('toggleMusic'));
+document.getElementById('subsBtn').addEventListener('click', call('toggleSubs'));
+P.render();
+P.componentDidMount();
+
+</script>
+
+<style>
+#hx-open{position:fixed;top:12px;right:12px;z-index:1000;height:40px;padding:0 16px;border-radius:20px;border:none;background:#1466F0;color:#fff;font:700 14px Lato,system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+#hx-open:focus-visible,#hx-copy:focus-visible,#hx-close:focus-visible,#hx-name:focus-visible{outline:3px solid #FFD27A;outline-offset:2px}
+#hx-modal{position:fixed;inset:0;z-index:1001;background:rgba(5,12,24,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+#hx-modal[hidden]{display:none}
+#hx-box{width:min(720px,100%);max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:12px;background:#fff;color:#0B2545;border-radius:18px;padding:20px;font-family:Lato,system-ui,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+#hx-box h2{margin:0;font:700 22px Lexend,Lato,sans-serif}
+#hx-box p{margin:0;font-size:14px;color:#3B4F6B;line-height:1.5}
+#hx-box label{font-weight:900;font-size:14px}
+#hx-name{width:100%;height:46px;box-sizing:border-box;border:2px solid #DCE1E8;border-radius:12px;padding:0 14px;font:16px Lato,system-ui,sans-serif;color:#0B2545}
+#hx-sig{width:100%;height:min(42vh,320px);box-sizing:border-box;border:1px solid #DCE1E8;border-radius:12px;padding:12px;font:14px/1.5 Georgia,'Times New Roman',serif;color:#202124;resize:vertical}
+.hx-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#hx-copy{height:42px;padding:0 18px;border-radius:21px;border:none;background:#2F7A22;color:#fff;font:700 15px Lato,system-ui,sans-serif;cursor:pointer}
+#hx-close{height:42px;padding:0 18px;border-radius:21px;border:1px solid #DCE1E8;background:#fff;color:#0B2545;font:700 15px Lato,system-ui,sans-serif;cursor:pointer}
+#hx-msg{font-size:14px;font-weight:700;color:#2F7A22}
+.hx-steps{margin:0;padding-left:20px;font-size:14px;color:#3B4F6B;line-height:1.6}
+</style>
+<button type="button" id="hx-open">Copy signature</button>
+<div id="hx-modal" hidden role="dialog" aria-modal="true" aria-labelledby="hx-title">
+<div id="hx-box">
+<h2 id="hx-title">Your Salesforce email signature</h2>
+<p>Type your full name, as it shows in Salesforce and Teams. It replaces [ Full Name ] below. Then copy the signature.</p>
+<label for="hx-name">Your full name</label>
+<input id="hx-name" type="text" autocomplete="name" placeholder="For example: Alex Rivera">
+<textarea readonly id="hx-sig" aria-label="Email signature to copy"></textarea>
+<div class="hx-row"><button type="button" id="hx-copy">Copy signature</button><button type="button" id="hx-close">Close</button><span id="hx-msg" aria-live="polite"></span></div>
+<ol class="hx-steps"><li>In Salesforce, click your avatar (top right), then <b>Settings</b>.</li><li>Left menu: <b>Email</b> &rsaquo; <b>My Email Settings</b>.</li><li>Paste it in the <b>Email Signature</b> box. Keep <b>Salesforce Email Composer</b> selected.</li><li>Click <b>Save</b>. Then check it: case &rsaquo; Feed &rsaquo; Email &rsaquo; Compose.</li></ol>
+</div></div>
+<script>
+(function(){
+  var SIG = "—\n[ Full Name ]\nCustomer Support Specialist\nMarketFully\nDirect: 954-421-0890\nwww.marketfully.com\nMarketFully LinkedIn\n\nMotionPoint | Key Content | Social Element\n\nThis communication contains proprietary information and may be confidential. If you are not the intended recipient, the reading, copying, disclosure or other use of the contents of this e-mail is strictly prohibited and you are instructed to please delete this e-mail immediately.";
+  var m = document.getElementById('hx-modal'), msg = document.getElementById('hx-msg'), nm = document.getElementById('hx-name'), ta = document.getElementById('hx-sig');
+  function fill(){ var v = nm.value.trim(); ta.value = SIG.replace('[ Full Name ]', v || '[ Full Name ]'); msg.textContent = ''; }
+  fill();
+  nm.addEventListener('input', fill);
+  document.getElementById('hx-open').addEventListener('click', function(){ m.hidden = false; msg.textContent = ''; nm.focus(); });
+  document.getElementById('hx-close').addEventListener('click', function(){ m.hidden = true; });
+  m.addEventListener('click', function(e){ if (e.target === m) m.hidden = true; });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !m.hidden) m.hidden = true; });
+  document.getElementById('hx-copy').addEventListener('click', function(){
+    if (!nm.value.trim()) { msg.style.color = '#B42318'; msg.textContent = 'Add your full name first.'; nm.focus(); return; }
+    msg.style.color = '#2F7A22';
+    function fallback(){ ta.focus(); ta.select(); try { document.execCommand('copy'); msg.textContent = 'Copied.'; } catch (e) { msg.textContent = 'Text selected: press Ctrl+C (Cmd+C on Mac).'; } }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(function(){ msg.textContent = 'Copied. Paste it in Email Signature, then Save.'; }, fallback); else fallback();
+  });
+})();
+</script>
+</body>
+</html>
